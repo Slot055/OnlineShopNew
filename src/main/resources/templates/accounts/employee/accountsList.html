@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База Аккаунтов</title>
+</head>
+<body>
+
+<a href="/accounts/new">Создать новый аккаунт</a>
+
+<h2>Список Аккаунтов</h2>
+<table cellpadding="2" cellspacing="3" border="2">
+    <tr>
+        <th>Номер Аккаунта</th>
+        <th>Логин</th>
+        <th>Пароль</th>
+        <th>Статус Аккаунта</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="account:\${accounts}">
+
+        <td th:text="\${account.id}">
+        <td th:text="\${account.login}">
+        <td th:text=\${account.password}>
+        <td th:text=\${account.statusAccount}>
+        <td>
+            <a th:href="@{/accounts/{id}(id=\${account.getId()})}" th:text="Данные"></a>
+        </td>
+        <td>
+            <a th:href="@{/accounts/{id}/edit(id=\${account.getId()})}" th:text="Редактировать"></a>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{/accounts/{id}(id=\${account.getId()})}">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

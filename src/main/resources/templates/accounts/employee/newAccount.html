@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация аккаунта</title>
+    <h1>Форма создания нового аккаунта</h1>
+    <h2>Введите данные</h2>
+</head>
+<body>
+<div>
+    <form th:method="post" th:action="@{/accounts}" th:object="\${account}">
+        <label for="login">Логин:</label><br/>
+        <input type="text" id="login" name="login" th:field="*{login}"/>
+        <div style="color: red" th:if="\${#fields.hasErrors('login')}" th:errors="*{login}">Name Error</div><br/>
+        <label for="password">Пароль:</label><br/>
+        <input type="text" id="password" name="password" th:field="*{password}"/>
+        <div style="color: red" th:if="\${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div><br/>
+        <label for="statusAccount">Статус Аккаунта:</label><br/>
+        <select name="statusAccount" id="statusAccount">
+            <option th:each="statusAcc : \${T(ru.example.onlineshopnew.model.account.StatusAccount).values()}"
+                    th:value="\${statusAcc}" th:field="*{statusAccount}" th:text="\${statusAcc.name}"></option>
+        </select>
+        <br/>
+        <br/>
+        <input type="submit" value="Создать">
+        <br/>
+        <br/>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <button type="button" class="btn btn-default" th:onclick="history.go(-1)">Назад</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

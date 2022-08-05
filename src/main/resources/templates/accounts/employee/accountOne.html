@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница Аккаунта</title>
+
+</head>
+<body>
+<h2 th:text="'Аккаунт: ' + \${account.getLogin}"></h2>
+
+<div class="col-sm-12 d-flex justify-content-center">
+    <button type="button" class="btn btn-default" th:onclick="history.go(-1)">Назад</button>
+</div>
+</body>
+</html>
