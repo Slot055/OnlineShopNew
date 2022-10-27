@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>База Пользоватедей</title>
+</head>
+<body>
+
+<h2>Список Пользователей</h2>
+<table cellpadding="2" cellspacing="3" border="2">
+  <tr>
+    <th>Номер Пользователя</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Пол</th>
+    <th>Возраст</th>
+    <th>Номер телефона</th>
+    <th>Адрес электронной почты</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr th:each="person:\${persons}">
+
+    <td th:text="\${person.id}">
+    <td th:text="\${person.name}">
+    <td th:text="\${person.lastName}">
+    <td th:text="\${person.gender}">
+    <td th:text="\${person.age}">
+    <td th:text="\${person.phoneNumber}">
+    <td th:text="\${person.email}">
+    <td>
+      <a th:href="@{/authentification/person/{id}(id=\${person.getId()})}" th:text="Данные"></a>
+    </td>
+    <td>
+      <a th:href="@{/authentification/person/{id}/edit(id=\${person.getId()})}" th:text="Редактировать"></a>
+    </td>
+    <td>
+      <form th:method="delete" th:action="@{/authentification/person/{id}(id=\${person.getId()})}">
+        <input type="submit" value="Удалить">
+      </form>
+    </td>
+  </tr>
+</table>
+<div th:insert="fragmentTemplate::returnToAccount"></div>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+</body>
+</html>

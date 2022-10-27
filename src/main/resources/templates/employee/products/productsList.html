@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База Аккаунтов</title>
+</head>
+<body>
+
+<a href="/authentification/employee/products/new">Создать новый товар</a>
+
+<h2>Список Товаров</h2>
+<table cellpadding="2" cellspacing="3" border="2">
+    <tr>
+        <th>Артикул</th>
+        <th>Тип</th>
+        <th>Категория</th>
+        <th>Группа</th>
+        <th>Наименование</th>
+        <th>Цена</th>
+        <th>Штрих-код</th>
+        <th>Описание</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    <tr th:each="product:\${products}">
+
+        <td th:text="\${product.item}">
+        </td>
+        <td th:text="\${product.typeProduct}">
+        </td>
+        <td th:text="\${product.categoryProduct}">
+        </td>
+        <td th:text="\${product.groupProduct}">
+        </td>
+        <td th:text="\${product.nameProduct}">
+        </td>
+        <td th:text="\${product.price}">
+        </td>
+        <td th:text="\${product.barCode}">
+        </td>
+        <td th:text="\${product.description}">
+        </td>
+        <td>
+            <a th:href="@{/products/{item}(item=\${product.getItem()})}" th:text="Данные"></a>
+        </td>
+        <td>
+            <a th:href="@{/authentification/employee/products/{item}/edit(item=\${product.getItem()})}"
+               th:text="Редактировать"></a>
+        </td>
+        <td>
+            <form th:method="delete"
+                  th:action="@{/authentification/employee/products/{item}(item=\${product.getItem()})}">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+</table>
+<div th:insert="fragmentTemplate::returnToAccount"></div>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+</body>
+</html>

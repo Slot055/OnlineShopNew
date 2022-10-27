@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Заведение товара</title>
+    <h1>Форма создания нового товара</h1>
+    <h2>Введите данные</h2>
+</head>
+<body>
+<div>
+    <form th:method="post" th:action="@{/authentification/employee/products}" th:object="\${product}">
+        <label for="typeProduct">Тип:</label><br>
+        <input type="text" id="typeProduct" name="typeProduct" th:field="*{typeProduct}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('typeProduct')}" th:errors="*{typeProduct}">typeProduct Error</div>
+        <label for="categoryProduct">Категория:</label><br>
+        <input type="text" id="categoryProduct" name="categoryProduct" th:field="*{categoryProduct}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('categoryProduct')}" th:errors="*{categoryProduct}">categoryProduct Error</div>
+        <label for="groupProduct">Группа:</label><br>
+        <input type="text" id="groupProduct" name="groupProduct" th:field="*{groupProduct}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('groupProduct')}" th:errors="*{groupProduct}">groupProduct Error</div>
+        <label for="nameProduct">Наименование:</label><br>
+        <input type="text" id="nameProduct" name="nameProduct" th:field="*{nameProduct}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('nameProduct')}" th:errors="*{nameProduct}">nameProduct Error</div>
+        <label for="price">Цена:</label><br>
+        <input type="text" id="price" name="price" th:field="*{price}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('price')}" th:errors="*{price}">price Error</div>
+        <label for="barCode">Штрих-код:</label><br>
+        <input type="text" id="barCode" name="barCode" th:field="*{barCode}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('barCode')}" th:errors="*{barCode}">barCode Error</div>
+        <label for="description">Описание:</label><br>
+        <input type="text" id="description" name="description" th:field="*{description}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('description')}" th:errors="*{description}">description Error</div>
+        <br/>
+        <br/>
+        <input type="submit" value="Создать">
+        <br/>
+        <br/>
+        <div th:insert="fragmentTemplate::returnToAccount"></div>
+        <div th:insert="fragmentTemplate::returnToHomePage"></div>
+        <div th:insert="fragmentTemplate::back"></div>
+    </form>
+</div>
+</body>
+</html>

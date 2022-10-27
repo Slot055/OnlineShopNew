@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат поиска</title>
+</head>
+<body>
+
+<h2>Список товаров по результатам поиска</h2>
+
+    <div th:each="product : \${searchProductsResult}">
+        <a th:href="@{/products/{item}(item=\${product.getItem})}"
+           th:text="'Наименование: ' + \${product.getGroupProduct} + ' --- ' + \${product.getNameProduct} + ' --- ' + 'Цена: ' + \${product.getPrice}"></a>
+    </div>
+
+
+<div>
+    <div th:insert="fragmentTemplate::returnToHomePage"></div>
+    <div th:insert="fragmentTemplate::back"></div>
+</div>
+</body>
+</html>

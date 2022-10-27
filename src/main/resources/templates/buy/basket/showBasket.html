@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина Товаров</title>
+</head>
+<body>
+<h2>Список Товаров</h2>
+<table cellpadding="2" cellspacing="3" border="2">
+    <tr>
+        <th>Артикул</th>
+        <th>Группа</th>
+        <th>Наименование</th>
+        <th>Цена</th>
+        <th>-</th>
+        <th>Количество</th>
+        <th>+</th>
+        <th>Сумма</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <div th:with="total=\${#numbers.formatDecimal(#aggregates.sum(basket.![getProduct().getPrice() * getQuantityInBasket()]),0,2)}">
+
+        <tr th:each="basketOne:\${basket}"
+            th:class="\${basketOneStat.odd}? 'odd'">
+
+            <td th:text="\${basketOne.getProduct().getItem()}">
+            </td>
+            <td th:text="\${basketOne.getProduct().getGroupProduct()}">
+            </td>
+            <td th:text="\${basketOne.getProduct().getNameProduct()}">
+            </td>
+            <td th:text="\${basketOne.getProduct().getPrice()}">
+            </td>
+            <td>
+                <form th:method="patch" th:action="@{/authentification/basket/{id}(id=\${basketOne.getId()})}">
+
+                    <input type="submit" value="-">
+                </form>
+            </td>
+            <td th:text="\${basketOne.quantityInBasket}">
+            </td>
+            <td>
+                <form th:method="post"
+                      th:action="@{/authentification/basket/{item}(item=\${basketOne.getProduct().getItem()})}">
+
+                    <input type="submit" value="+">
+                </form>
+            </td>
+            <td th:text="\${#numbers.formatDecimal((basketOne.getProduct().getPrice() * basketOne.getQuantityInBasket()),0,2)}">
+            </td>
+            <td>
+                <a th:href="@{/products/{item}(item=\${basketOne.getProduct().getItem()})}" th:text="Данные"></a>
+            </td>
+            <td>
+                <form th:method="delete" th:action="@{/authentification/basket/{id}(id=\${basketOne.getId()})}">
+                    <input type="submit" value="Удалить">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" align="right">Сумма всех товаров:</td>
+            <td th:text="\${total}"></td>
+            <td>
+                <form th:method="post" th:action="@{/authentification/order}">
+                    <input type="submit" value="Купить">
+                </form>
+            </td>
+        </tr>
+    </div>
+</table>
+<div th:insert="fragmentTemplate::returnToAccount"></div>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+</body>
+</html>

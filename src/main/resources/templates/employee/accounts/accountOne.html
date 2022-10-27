@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница Аккаунта</title>
+
+</head>
+<body>
+<h2 th:text="'Аккаунт: ' + \${account.getLogin()}"></h2>
+<h2 th:text="\${account.getPerson().getName()}"></h2>
+
+<p><a th:href="@{/authentification/employee/persons/{id}(id=\${account.getPerson().getId()})}" th:text="'Личные данные'"></a></p>
+<p><a th:href="@{/authentification/employee/persons/{id}/edit(id=\${account.getPerson().getId()})}" th:text="'Редактирование личных данных'"></a></p>
+
+<div th:insert="fragmentTemplate::returnToAccount"></div>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+</body>
+</html>

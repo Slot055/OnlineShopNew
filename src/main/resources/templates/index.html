@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
 </head>
 <body>
+<h2 style="text-align:center">Онлайн - магазин</h2>
+<script type="text/javascript">
+    function getDate() {
+        var date = new Date();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        if (hours < 10) {
+            hours = '0' + hours;
+        }
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
+        document.getElementById('timedisplay').innerHTML = hours + ':' + minutes + ':' + seconds;
+    }
+
+    setInterval(getDate, 0);
+
+
+</script>
+<h3 style="text-align:center">Время:
+    <em id="timedisplay"></em>
+</h3>
+<!--<h3>Пользователь</h3>
+Логин: <span sec:authentication="name"></span><br>
+Статус: <span sec:authentication="principal.authorities"></span><br>
+<br>-->
+<h3>Меню пользователя</h3>
+<a href="">информация о магазине</a><br>
+<td>
+    <div sec:authorize="isAnonymous()">
+        <a href="/authentification/login">Войти в аккаунт</a><br>
+        <a href="/authentification/registration">Регистрация аккаунта</a></div>
+    <div sec:authorize="isAuthenticated()">
+        <a href="/authentification/login">Aккаунт</a><br>
+        <a href="/authentification/basket">Корзина товаров</a></div>
+</td>
+<a href="/products/catalog?parameterCatalog">Каталог товаров</a><br>
+<a href="/products/searchProducts">Поиск товара</a><br>
 
 </body>
 </html>

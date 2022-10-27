@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск товара</title>
+    <h1 style="text-align:center">Поиск товара</h1>
+    <h2>Выберите критерий поиска:</h2>
+</head>
+<body>
+
+<div>
+    <form th:method="post" th:action="@{/products/searchProducts/}">
+        <label for="typeProduct">Тип:</label><br>
+        <input type="text" id="typeProduct" name="typeProduct"><br>
+        <label for="categoryProduct">Категория:</label><br>
+        <input type="text" id="categoryProduct" name="categoryProduct"><br>
+        <label for="groupProduct">Группа:</label><br>
+        <input type="text" id="groupProduct" name="groupProduct"><br>
+        <label for="nameProduct">Наименование:</label><br>
+        <input type="text" id="nameProduct" name="nameProduct"><br>
+
+        <br>
+        <label for="priceMin">Минимальная цена:</label><br>
+        <input type="text" id="priceMin" name="priceMin" value="0"/><br>
+        <label for="priceMax">Максимальная цена:</label><br>
+        <input type="text" id="priceMax" name="priceMax" value="0"/><br>
+        <br>
+        <input type="submit" name="signup" value="Применить">
+
+    </form>
+    <div th:insert="fragmentTemplate::returnToHomePage"></div>
+    <div th:insert="fragmentTemplate::back"></div>
+</div>
+</body>
+</html>

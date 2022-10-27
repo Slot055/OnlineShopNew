@@ -1,9 +1,11 @@
 package ru.example.onlineshopnew.model.account;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
 
-    ADMIN("ADMIN"),
-    USER("USER");
+public enum Role implements GrantedAuthority{
+
+    ADMIN("ROLE_ADMIN"),
+    USER("ROLE_USER");
 
     private final String name;
 
@@ -15,4 +17,8 @@ public enum Role {
         return name;
     }
 
+    @Override
+    public String getAuthority() {
+        return getName();
+    }
 }

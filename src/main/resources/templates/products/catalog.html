@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог товаров</title>
+</head>
+<body>
+<h2>Каталог Товаров</h2>
+<td>
+    <div th:if="\${productsResult.size}>0">
+        <div th:each="product : \${productsResult}">
+            <a th:href="@{/products/{item}(item=\${product.getItem})}" th:text="'Наименование: ' + \${product.getNameProduct}+ ' --- ' + 'Цена: ' + \${product.getPrice}"></a>
+        </div>
+    </div>
+
+    <div th:unless="\${productsResult.size}>0">
+        <div th:each="parameter : \${parameterSet}">
+
+            <a th:href="@{/products/catalog(parameterCatalog=\${parameter})}" th:text="\${parameter}"></a>
+        </div>
+    </div>
+
+</td>
+<br>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+
+</body>
+</html>

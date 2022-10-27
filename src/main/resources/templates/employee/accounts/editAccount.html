@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование данных аккаунта</title>
+    <h1>Форма редактирования данных аккаунта</h1>
+    <h2>Введите новые данные</h2>
+</head>
+<body>
+<div>
+    <form th:method="patch" th:action="@{/authentification/employee/accounts/{id}(id=\${account.getId()})}" th:object="\${account}">
+        <label for="login">Логин:</label><br>
+        <input type="text" id="login" name="login" th:field="*{login}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('login')}" th:errors="*{login}">login Error</div>
+        <label for="password">Пароль:</label><br>
+        <input type="text" id="password" name="password" th:field="*{password}"><br>
+        <div style="color: red" th:if="\${#fields.hasErrors('password')}" th:errors="*{password}">password Error</div>
+        <label for="role">Статус Аккаунта:</label><br>
+        <select name="role" id="role">
+            <option th:each="roleOpt : \${T(ru.example.onlineshopnew.model.account.Role).values()}"
+                    th:value="\${roleOpt}" th:field="*{role}" th:text="\${roleOpt.name}"></option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Обновить">
+        <br>
+        <br>
+        <div th:insert="fragmentTemplate::returnToAccount"></div>
+        <div th:insert="fragmentTemplate::returnToHomePage"></div>
+        <div th:insert="fragmentTemplate::back"></div>
+    </form>
+</div>
+</body>
+</html>

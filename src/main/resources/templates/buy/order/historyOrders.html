@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заказов</title>
+</head>
+<body>
+
+<h2>Список Заказов</h2>
+<table cellpadding="2" cellspacing="3" border="2">
+    <tr>
+        <th>Номер заказа</th>
+        <th>Дата заказа</th>
+        <th>Статус оплаты</th>
+        <th>Статус заказа</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="order:\${orders}">
+
+        <td th:text="\${order.getNumberOrder()}"></td>
+        <td th:text="\${order.getDateTime()}"></td>
+        <!--<td th:text="\${order.getCheck.getPay().getName()}"></td>-->
+        <td th:text="\${order.getStatusOrder().getName()}"></td>
+        <td>
+            <a th:href="@{/authentification/order/{numberOrder}(numberOrder=\${order.getNumberOrder()})}"
+               th:text="Данные"></a>
+        </td>
+    </tr>
+</table>
+<div th:insert="fragmentTemplate::returnToAccount"></div>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+</body>
+</html>

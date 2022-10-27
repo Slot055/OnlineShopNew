@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личные данные</title>
+
+</head>
+<body>
+<h2 th:text="'Личные данные:'"></h2>
+<table cellpadding="2" cellspacing="3" border="2">
+    <tr>
+        <th>имя</th>
+        <td th:text="\${person.name}">
+    </tr>
+    <tr>
+        <th>фамилия</th>
+        <td th:text="\${person.lastName}">
+    </tr>
+    <tr>
+        <th>пол</th>
+        <td th:text="\${person.gender}">
+    </tr>
+    <tr>
+        <th>возраст</th>
+        <td th:text="\${person.age}">
+    </tr>
+    <tr>
+        <th>номер телефона</th>
+        <td th:text="\${person.phoneNumber}">
+    </tr>
+    <tr>
+        <th>электронная почта</th>
+        <td th:text="\${person.email}">
+    </tr>
+</table>
+<br>
+<div th:insert="fragmentTemplate::returnToAccount"></div>
+<div th:insert="fragmentTemplate::returnToHomePage"></div>
+<div th:insert="fragmentTemplate::back"></div>
+</body>
+</html>
