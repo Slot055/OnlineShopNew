@@ -5,7 +5,6 @@ import ru.example.onlineshopnew.model.account.Account;
 import ru.example.onlineshopnew.model.account.Role;
 import ru.example.onlineshopnew.model.person.Person;
 import ru.example.onlineshopnew.repository.AccountRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

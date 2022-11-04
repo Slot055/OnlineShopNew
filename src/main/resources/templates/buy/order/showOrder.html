@@ -19,9 +19,9 @@
         <th></th>
     </tr>
 
-    <div th:with="total=\${#numbers.formatDecimal(#aggregates.sum(order.![getProduct().getPrice() * getQuantityInBasket()]),0,2)}">
+    <div th:with="total=\${#numbers.formatDecimal(#aggregates.sum(order.listProducts.![getProduct().getPrice() * getQuantityInBasket()]),0,2)}">
 
-        <tr th:each="basketOne:\${order}"
+        <tr th:each="basketOne:\${order.listProducts}"
             th:class="\${basketOneStat.odd}? 'odd'">
 
             <td th:text="\${basketOne.getProduct().getItem()}">
@@ -41,7 +41,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7" align="right">Сумма всех товаров:</td>
+            <td colspan="5" align="right">Сумма всех товаров:</td>
             <td th:text="\${total}"></td>
             <td>
                 <form th:method="post" th:action="@{/authentification/order}">

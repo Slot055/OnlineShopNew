@@ -2,13 +2,15 @@ package ru.example.onlineshopnew.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.example.onlineshopnew.model.buy.Order;
+import ru.example.onlineshopnew.model.buy.StatusOrder;
 import ru.example.onlineshopnew.repository.OrderRepository;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderService implements ServiceClass{
+public class OrderService implements ServiceClass {
 
     private final OrderRepository orderRepository;
 
@@ -37,7 +39,7 @@ public class OrderService implements ServiceClass{
     @Override
     public boolean update(Object object, int numberOrder) {
         Order order = (Order) object;
-        if(orderRepository.existsById(numberOrder)){
+        if (orderRepository.existsById(numberOrder)) {
             order.setNumberOrder(numberOrder);
             orderRepository.save(order);
             return true;
@@ -47,7 +49,7 @@ public class OrderService implements ServiceClass{
 
     @Override
     public boolean delete(int numberOrder) {
-        if(orderRepository.existsById(numberOrder)){
+        if (orderRepository.existsById(numberOrder)) {
             orderRepository.deleteById(numberOrder);
             return true;
         }
@@ -61,7 +63,13 @@ public class OrderService implements ServiceClass{
 
     @Override
     public List<Order> loadObjectsByParameter(String... id) {
-        return orderRepository.findOrderByAccountId(Integer.parseInt(id[0]));
+        List<String> idList = Arrays.stream(id).toList();
+        List<StatusOrder> idStatusOrderList = new ArrayList<>();
+        for (int i = 1; i < id.length; i++) {
+            StatusOrder statusOrderOne = StatusOrder.valueOf(idList.get(i));
+            idStatusOrderList.add(statusOrderOne);
+        }
+        return orderRepository.findOrderByAccountIdAndStatusOrderIn(Integer.parseInt(id[0]), idStatusOrderList);
     }
 
 }

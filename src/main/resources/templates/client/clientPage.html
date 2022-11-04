@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Страница пользователя</title>
-    <h1 th:text="'Страница пользователя: ' + \${account.getLogin}"> </h1>
+    <meta charset="UTF-8">
+    <title>Страница пользователя</title>
+    <h1 th:text="'Страница пользователя: ' + \${account.getLogin}"></h1>
 </head>
 <body>
 <h3>Меню пользователя</h3>
 <p><a th:href="@{/authentification/person}" th:text="'Личные данные'"></a></p>
 <p><a th:href="@{/authentification/person/edit}" th:text="'Редактирование личных данных'"></a></p>
 <p><a th:href="@{/authentification/order}" th:text="Заказы"></a></p>
-<p><a href="">история заказов</a></p>
+<p><a th:href="@{/authentification/order/historyOrders}" th:text="'Архив заказов'"></a></p>
 <p><a href="">Финансы</a>
+    <br>
+<p><a href="/authentification/basket">Корзина товаров</a></p>
 <br>
 <div th:insert="fragmentTemplate::returnToHomePage"></div>
 <div th:insert="fragmentTemplate::back"></div>
